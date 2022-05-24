@@ -1,8 +1,8 @@
 '''
-Bubble sort algorithm
+Insertion sort algorithm
 
 Run this in the terminal:
-    ./bubbleSort.py
+    ./insertionSort.py
 '''
 
 from typing import List
@@ -20,14 +20,16 @@ def sort(L: List[int]) -> None:
     there is nothing returned.
     The parameter `L` should be sorted by the end of the function.
     '''
+    
+    sortedIndex = 1     # Everything is sorted, upto but not including sortedIndex
+    currIndex = 1       # The index of the item currently being sorted
 
-    noProblem = False
-    while not noProblem:
-        noProblem = True
-        for i in range(len(L) - 1):     # Upto but not including the last item
-            if L[i] > L[i+1]:
-                L[i], L[i+1] = L[i+1], L[i]     # Swap current and next items
-                noProblem = False
+    while sortedIndex < len(L):
+        while currIndex > 0 and L[currIndex] < L[currIndex - 1]:
+            L[currIndex], L[currIndex - 1] = L[currIndex - 1], L[currIndex]
+            currIndex -= 1
+        sortedIndex += 1
+        currIndex = sortedIndex
 
 
 def isNonDescending(L: List[int]) -> bool:
@@ -38,7 +40,7 @@ def isNonDescending(L: List[int]) -> bool:
     Post:
         Return True if `L` is in non-descending order.
         Otherwise, return False.
-    
+
     Check if `L` is sorted in non-descending order.
     '''
 
@@ -46,6 +48,7 @@ def isNonDescending(L: List[int]) -> bool:
         if L[i] > L[i+1]:
             return False
     return True
+
 
 if __name__ == '__main__':
 

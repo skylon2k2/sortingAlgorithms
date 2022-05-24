@@ -1,8 +1,8 @@
 '''
-Bubble sort algorithm
+Selection sort algorithm
 
 Run this in the terminal:
-    ./bubbleSort.py
+    ./selectionSort.py
 '''
 
 from typing import List
@@ -21,13 +21,17 @@ def sort(L: List[int]) -> None:
     The parameter `L` should be sorted by the end of the function.
     '''
 
-    noProblem = False
-    while not noProblem:
-        noProblem = True
-        for i in range(len(L) - 1):     # Upto but not including the last item
-            if L[i] > L[i+1]:
-                L[i], L[i+1] = L[i+1], L[i]     # Swap current and next items
-                noProblem = False
+    sortedIndex = 0     # Everything is sorted, upto but not including sortedIndex
+    currIndex = 0       # The index of the item currently being analyzed
+    while sortedIndex < len(L):
+        minDex = currIndex      # The index of the smallest item from {sortedIndex, ..., len(L)-1}
+        while currIndex < len(L):
+            if L[currIndex] < L[minDex]:
+                minDex = currIndex
+            currIndex += 1
+        L[sortedIndex], L[minDex] = L[minDex], L[sortedIndex]
+        sortedIndex += 1
+        currIndex = sortedIndex
 
 
 def isNonDescending(L: List[int]) -> bool:
@@ -62,5 +66,3 @@ if __name__ == '__main__':
     print("The sorted array is", end=" ")
     print(L)
     print(f"Sorted = {isNonDescending(L)}")
-
-            
